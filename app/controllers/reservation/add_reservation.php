@@ -11,25 +11,25 @@ include_once '../../models/reservation.php';
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate blog user object
-$user = new user($db);
+// Instantiate blog reservation object
+$reservation = new reservation($db);
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
-  $user->name = $data->name;
-  $user->email = $data->email;
-  $user->password = $data->password;
+  $reservation->id_user = $data->id_user;
+  $reservation->salle_name = $data->salle_name;
+  $reservation->place_numero = $data->place_numero;
+  $reservation->reservation_date = $data->reservation_date;
+  $reservation->price = $data->price;
     // Create post
-    if($user->register()) {
+    if($reservation->add_reservation()) {
         echo json_encode(
-          array('message' => 'account Created',
-                'resulte' => $user->token
-                )
+          array('message' => 'Reservation Created')
         );
       } else {
         echo json_encode(
-          array('message' => 'account Not Created')
+          array('message' => 'Reservation Not Created')
         );
       }
 ?>

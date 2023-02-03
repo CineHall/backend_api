@@ -31,6 +31,7 @@ class reservation
         $stmt->bindParam(':reservation_date', $this->reservation_date);
         $stmt->bindParam(':price', $this->price);
 
+        $this->reserveed();
         // Execute query
         if ($stmt->execute()) {
             return true;
@@ -54,12 +55,13 @@ class reservation
         $stmt->bindParam(':place_numero', $this->place_numero);
         $stmt->execute();
         $place_info = $stmt->fetch();
+        $place_id = $place_info['id_place'];
+        $reserve = 1;
 
-        $place_id = $place_info->id_place;
-
-        $query2 = 'UPDATE ' .  $this->salle_name . 'SET reserve = 1 WHERE id_place = :id_place';
+        $query2 = 'UPDATE ' .  $this->salle_name . ' SET reserve = :reserve WHERE id_place = :id_place';
 
         $stmt2 = $this->conn->prepare($query2);
+        $stmt2->bindParam(':reserve', $reserve);
         $stmt2->bindParam(':id_place', $place_id);
         if ($stmt2->execute()) {
             return true;
@@ -81,26 +83,26 @@ class reservation
         // fetch info for reservation
         $reservation_info = $stmt->fetch();
         // put info name hall and number place in varibales
-        $salle_name = $reservation_info->salle_name;
-        $place_numero = $reservation_info->place_numero;
-
+        $this->salle_name = $reservation_info['salle_name'];
+        $this->place_numero = $reservation_info['place_numero'];
+        
         // delete reservation by id
         $query2 = 'DELETE  FROM reservation WHERE id = ' . $this->id;
         $stmt2 = $this->conn->prepare($query2);
         $stmt2->execute();
-
+        
         // select row from $salle_name where place number = $place_numero
-        $query3 = 'SELECT * FROM ' . $salle_name . ' WHERE place_numero = :place_numero ';
+        $query3 = 'SELECT * FROM ' . $this->salle_name . ' WHERE place_numero = :place_numero ';
         $stmt3 = $this->conn->prepare($query3);
-        $stmt3->bindParam(':place_numero', $place_numero);
+        $stmt3->bindParam(':place_numero', $this->place_numero);
         $stmt3->execute();
         // fetch info place
         $place_info = $stmt3->fetch();
         // put info id_place in varibale
-        $place_id = $place_info->id_place;
-
-        $query4 = 'UPDATE ' .  $salle_name . 'SET reserve = 0 WHERE id_place = :id_place';
-
+        $place_id = $place_info['id_place'];
+        
+        $query4 = 'UPDATE ' .  $this->salle_name . ' SET reserve = 0 WHERE id_place = :id_place';
+        
         $stmt4 = $this->conn->prepare($query4);
         $stmt4->bindParam(':id_place', $place_id);
         if ($stmt4->execute()) {

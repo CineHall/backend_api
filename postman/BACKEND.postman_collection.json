@@ -317,6 +317,73 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Resrvation",
+			"item": [
+				{
+					"name": "add_reservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\" : \"4\",\r\n    \"salle_name\" : \"salle_1\",\r\n    \"place_numero\" : \"10\",\r\n    \"reservation_date\" : \"2023-02-03\",\r\n    \"price\" : \"60\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/Backend_api/app/controllers/Reservation/add_reservation.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"Backend_api",
+								"app",
+								"controllers",
+								"Reservation",
+								"add_reservation.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete reservation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/Backend_api/app/controllers/Reservation/delete_reservation.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"Backend_api",
+								"app",
+								"controllers",
+								"Reservation",
+								"delete_reservation.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

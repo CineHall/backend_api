@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 03 fév. 2023 à 00:11
+-- Généré le : ven. 03 fév. 2023 à 19:21
 -- Version du serveur : 10.4.27-MariaDB
--- Version de PHP : 8.2.0
+-- Version de PHP : 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,8 +40,9 @@ CREATE TABLE `films` (
 --
 
 INSERT INTO `films` (`id`, `name`, `time`, `place_price`, `hall_number`) VALUES
-(1, 'john_Wike', '2 hours', 60, 0),
-(2, 'elCamino', '1h30min', 40, 0);
+(1, 'john_Wike', '2 hours', 60, 1),
+(2, 'elCamino', '1h30min', 40, 2),
+(3, 'Squed Game', '3h', 100, 3);
 
 -- --------------------------------------------------------
 
@@ -52,7 +53,7 @@ INSERT INTO `films` (`id`, `name`, `time`, `place_price`, `hall_number`) VALUES
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `salle_numero` int(11) NOT NULL,
+  `salle_name` varchar(250) NOT NULL,
   `place_numero` int(11) NOT NULL,
   `reservation_date` date NOT NULL DEFAULT current_timestamp(),
   `price` float NOT NULL
@@ -281,8 +282,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `token`) VALUES
-(1, 'hassan', 'hassan@gmail.com', '123', 'hassan123'),
-(2, 'hassan', 'zert@ty.gh', '$2y$10$8ku1dOonfxRMpn.PdX38n.QDPytxUeNRwaXOyvDrYj3R2B5Cv9pwK', '118c5c147f6d3136cd66005c14e5dd20');
+(4, 'marouane', 'email@email.email', '$2y$10$6T3oG2NA6N6jbA0.kXZgGuEKahyRqkRxBB7zh5SFmTzwprB5zqnn2', '9636fb98ef6c20fa604cbc6dfccbcf42');
 
 --
 -- Index pour les tables déchargées
@@ -336,13 +336,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `films`
 --
 ALTER TABLE `films`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `salle_1`
@@ -366,7 +366,7 @@ ALTER TABLE `salle_3`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
